@@ -1,2 +1,2 @@
 # NTPSTeam6
-Network Traffic Proxy SystemSoftware Engineering II Spring 2019Team 6- Byte Me
+Network Traffic Proxy System - Team 6: Byte Me -Software Engineering II - Spring 2019
