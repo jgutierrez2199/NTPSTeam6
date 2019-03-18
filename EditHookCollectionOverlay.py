@@ -5,7 +5,7 @@
 import sys
 from PyQt5 import QtCore, QtGui, QtWidgets
 
-class EditHookCollectionOverlay(object):
+class UI_Dialog(object):
 
     def setupUi(self, Dialog):
         Dialog.setObjectName("Dialog")

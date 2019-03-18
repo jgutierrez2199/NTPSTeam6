@@ -6,6 +6,13 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import (QApplication, QMainWindow, QPushButton,
                              QToolTip, QMessageBox, QLabel)
 import EditHookCollectionOverlay
+import EditHook
+import HookCollectionExcecutionError
+import HookExcecutionError
+import ProxyBehaviorDisabledNotification
+import ProxyBehaviorEnabledNotification
+import QueueError
+import SavedFuzzed
 
 class Ui_MainWindow():
 
@@ -61,9 +68,6 @@ class Ui_MainWindow():
         self.HCVEditHookButton.setChecked(False)
         self.HCVEditHookButton.setFlat(False)
         self.HCVEditHookButton.setObjectName("HCVEditHookButton")
-        self.HCVEditHookButton.clicked.connect(self.EditHookButtonPressed)
-
-
 
 
         self.HCVSearchLable = QtWidgets.QLabel(self.HookCollectionViewPage)
@@ -648,7 +652,7 @@ class Ui_MainWindow():
         self.PacketAreaTabs.setCurrentIndex(0)
         self.PacketAreaTabs_2.setCurrentIndex(0)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
-  
+ 
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
@@ -796,6 +800,24 @@ class ControlMainWindow(QtWidgets.QMainWindow):
         self.ui.OVHookButton.clicked.connect(lambda : self.ui.ContentViewWidget.setCurrentIndex(1))
         self.ui.OVLivePacketButton.clicked.connect(lambda : self.ui.ContentViewWidget.setCurrentIndex(2))
         self.ui.OVPacketPCAPButton.clicked.connect(lambda : self.ui.ContentViewWidget.setCurrentIndex(3))
+
+        self.ui.HCVEditHookButton.clicked.connect(lambda : self.showEditHook())
+        self.ui.HVEditHookButton.clicked.connect(lambda: self.showEditHookCollection())
+
+    def showEditHook(self):
+        dialog = QtWidgets.QDialog()
+        ui = EditHook.Ui_CreatEditHookOverlay()
+        ui.setupUi(dialog)
+        dialog.exec_()
+        dialog.show()
+
+
+    def showEditHookCollection(self):
+        dialog = QtWidgets.QDialog()
+        ui = EditHookCollectionOverlay.UI_Dialog()
+        ui.setupUi(dialog)
+        dialog.exec_()
+        dialog.show()
 
 
 
