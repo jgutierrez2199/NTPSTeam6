@@ -143,16 +143,32 @@ class PCAPViewPage(QWidget):
         self.PacketAreaTabs.setGeometry(QtCore.QRect(10, 40, 721, 261))
         self.PacketAreaTabs.setTabShape(QtWidgets.QTabWidget.Rounded)
         self.PacketAreaTabs.setObjectName("PacketAreaTabs")
-
+        # Dissected packet Tab #
         self.DissectedTab = QtWidgets.QWidget()
         self.DissectedTab.setObjectName("DissectedTab")
         self.PacketAreaTabs.addTab(self.DissectedTab, "")
+        self.DissectedPacketTree = QtWidgets.QTreeWidget(self.DissectedTab)
+        self.DissectedPacketTree.setGeometry(QtCore.QRect(0, 0, 715, 275))
+        self.DissectedPacketTree.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.DissectedPacketTree.setFrameShadow(QtWidgets.QFrame.Sunken)
+        self.DissectedPacketTree.setHeaderHidden(True)
+        self.DissectedPacketTree.setColumnCount(2)
+        # Binary packet Tab #
         self.BinaryTab = QtWidgets.QWidget()
         self.BinaryTab.setObjectName("BinaryTab")
         self.PacketAreaTabs.addTab(self.BinaryTab, "")
+        self.BinaryPacketEdit = QtWidgets.QPlainTextEdit(self.BinaryTab)
+        self.BinaryPacketEdit.setGeometry(QtCore.QRect(0, 0, 715, 275))
+        self.BinaryPacketEdit.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.BinaryPacketEdit.setFrameShadow(QtWidgets.QFrame.Sunken)
+        # Hex packet Tab #
         self.HexTab = QtWidgets.QWidget()
         self.HexTab.setObjectName("HexTab")
         self.PacketAreaTabs.addTab(self.HexTab, "")
+        self.HexPacketEdit = QtWidgets.QPlainTextEdit(self.HexTab)
+        self.HexPacketEdit.setGeometry(QtCore.QRect(0, 0, 715, 275))
+        self.HexPacketEdit.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.HexPacketEdit.setFrameShadow(QtWidgets.QFrame.Sunken)
         # Packet clear Button #
         self.PacketAreaClearButton = QtWidgets.QPushButton(self.PacketAreaFrame)
         self.PacketAreaClearButton.setGeometry(QtCore.QRect(740, 270, 71, 25))

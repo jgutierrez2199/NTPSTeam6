@@ -4,6 +4,8 @@
 
 from MainWindow import Ui_MainWindow
 from PyQt5 import QtWidgets
+from PyQt5.QtWidgets import QDialog
+from EditHookOverlay import Ui_CreatEditHookOverlay
 import HookExecutionSequenceErrorOverlay, EditHookCollectionOverlay
 
 class UIControl(QtWidgets.QMainWindow):
@@ -17,21 +19,33 @@ class UIControl(QtWidgets.QMainWindow):
         self.ui.OptionViewFrame.OVLivePacketButton.clicked.connect(lambda: self.changeView(2))
         self.ui.OptionViewFrame.OVPacketPCAPButton.clicked.connect(lambda: self.changeView(3))
 
-        self.ui.HookViewPage.HVEditHookButton.clicked.connect(lambda: self.showDialog())
-        # Example ADD Hook #
-        self.ui.HookViewPage.HVAddHookButton.clicked.connect(lambda: self.ui.HookViewPage.addHook("Hook 1", "Hook 1 description", "1"))
-        # Example Delete Hook #
-        self.ui.HookViewPage.HVDeleteHookButton.clicked.connect(lambda: self.ui.HookViewPage.deleteHook())
+        self.ui.HookCollectionViewPage.HCVAddHookButton.clicked.connect(lambda: self.showAddHookCollectionOverlay())
+
+        self.ui.HookViewPage.HVAddHookButton.clicked.connect(lambda: self.showAddHooknOverlay())
+        self.ui.HookViewPage.HVDeleteHookButton.clicked.connect(lambda: self.deleteHook())
 
     def changeView (self, index):
         self.ui.ContentViewWidget.setCurrentIndex(index)
 
-    def showDialog (self):
+    def showAddHooknOverlay (self):
+        dialog = Ui_CreatEditHookOverlay()
+        if dialog.exec_() == QDialog.Accepted:
+            result=dialog.result
+            # Send result to Hook Handler, depending of the repsonse add to page #
+            self.ui.HookViewPage.addHook(result[0], result[1], "0")
+
+    def deleteHook (self):
+        hookToDelete = self.ui.HookViewPage.selectedHook()
+        # Alert Hook Handler and pass it hookToDlete #
+        self.ui.HookViewPage.deleteHook()
+
+    def showAddHookCollectionOverlay (self):
         dialog = QtWidgets.QDialog()
-        ui = EditHookCollectionOverlay.Ui_Dialog()
-        ui.setupUi(dialog)
+        overlay = EditHookCollectionOverlay.Ui_CreatEditHookCollectionOverlay()
+        overlay.setupUi(dialog)
         dialog.exec_()
         dialog.show()
+
 
 if __name__ == "__main__":
     import sys

@@ -59,6 +59,38 @@ class HookCollectionViewPage(QWidget):
         self.HookCollectionPropertiesLable.setStyleSheet("border-style: solid solid none solid;\n"
 "background-color: qlineargradient(spread:pad, x1:1, y1:1, x2:1, y2:0, stop:0 rgb(111, 168, 220), stop:1 rgb(159, 197, 232));")
         self.HookCollectionPropertiesLable.setObjectName("HookCollectionPropertiesLable")
+        self.HVHookCollectionPropertiesFrame = QtWidgets.QFrame(self)
+        self.HVHookCollectionPropertiesFrame.setGeometry(QtCore.QRect(20, 120, 801, 711))
+        self.HVHookCollectionPropertiesFrame.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.HVHookCollectionPropertiesFrame.setFrameShadow(QtWidgets.QFrame.Plain)
+        self.HVHookCollectionPropertiesFrame.setLineWidth(1)
+        self.HVHookCollectionPropertiesFrame.setObjectName("HVHookCollectionPropertiesFrame")
+        # Hook View Table #
+        self.tableWidget = QtWidgets.QTableWidget(self.HVHookCollectionPropertiesFrame)
+        self.tableWidget.setGeometry(QtCore.QRect(10, 50, 781, 650))
+        self.tableWidget.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.tableWidget.setFrameShadow(QtWidgets.QFrame.Sunken)
+        self.tableWidget.setLineWidth(1)
+        self.tableWidget.setEditTriggers(QtWidgets.QAbstractItemView.NoEditTriggers)
+        self.tableWidget.setAlternatingRowColors(False)
+        self.tableWidget.setSelectionMode(QtWidgets.QAbstractItemView.NoSelection)
+        self.tableWidget.setSelectionBehavior(QtWidgets.QAbstractItemView.SelectItems)
+        self.tableWidget.setTextElideMode(QtCore.Qt.ElideNone)
+        self.tableWidget.setShowGrid(False)
+        self.tableWidget.setWordWrap(True)
+        self.tableWidget.setCornerButtonEnabled(True)
+        self.tableWidget.setObjectName("tableWidget")
+        self.tableWidget.setColumnCount(5)
+        header_labels = [' ', 'Hook Collection', 'No. of Hooks', 'Hook Collection Status', 'Hook Collection Execution Sequence']
+        self.tableWidget.setHorizontalHeaderLabels(header_labels)
+        self.tableWidget.horizontalHeader().setStyleSheet(
+                "QHeaderView {font-size: 11; font-weight: bold; text-align: center;}")
+        self.tableWidget.horizontalHeader().setVisible(True)
+        self.tableWidget.horizontalHeader().setCascadingSectionResizes(True)
+        self.tableWidget.horizontalHeader().setDefaultSectionSize(200)
+        self.tableWidget.horizontalHeader().setMinimumSectionSize(50)
+        self.tableWidget.horizontalHeader().setStretchLastSection(True)
+        self.tableWidget.verticalHeader().setVisible(False)
         self.retranslatePage()
 
     def retranslatePage(self):
@@ -73,3 +105,22 @@ class HookCollectionViewPage(QWidget):
                                                                      "<html><head/><body><p align=\"right\"><span style=\" font-size:10pt; font-weight:600;\">Search</span></p></body></html>"))
             self.HookCollectionPropertiesLable.setText(_translate("MainWindow",
                                                                                     "<html><head/><body><p align=\"center\"><span style=\" font-size:16pt;\">Hook Collection Properties</span></p></body></html>"))
+            self.tableWidget.setSortingEnabled(True)
+            __sortingEnabled = self.tableWidget.isSortingEnabled()
+            self.tableWidget.setSortingEnabled(False)
+            self.tableWidget.setSortingEnabled(__sortingEnabled)
+
+    def selectedHookCollection(self):
+            rowCount = self.tableWidget.rowCount()
+            for row in range(rowCount):
+                if self.tableWidget.cellWidget(row,0).isChecked():
+                    return self.tableWidget.item(row,1).text()
+
+    def addHookCollection(self,Name,Number,Status,Sequence):
+            rowPosition = self.tableWidget.rowCount()
+            self.tableWidget.insertRow(rowPosition)
+            self.tableWidget.setCellWidget(rowPosition, 0, QtWidgets.QRadioButton(self.tableWidget))
+            self.tableWidget.setItem(rowPosition, 1, QtWidgets.QTableWidgetItem(Name))
+            self.tableWidget.setItem(rowPosition, 2, QtWidgets.QTableWidgetItem(Number))
+            self.tableWidget.setItem(rowPosition, 3, QtWidgets.QTableWidgetItem(Status))
+            self.tableWidget.setItem(rowPosition, 3, QtWidgets.QTableWidgetItem(Sequence))

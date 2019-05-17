@@ -2,7 +2,7 @@
 # Dr.Salamah
 # Team 6 - Byte Me
 
-from PyQt5 import QtCore, QtWidgets, QtGui
+from PyQt5 import QtCore, QtWidgets
 from PyQt5.QtWidgets import QWidget
 
 class HookViewPage(QWidget):
@@ -120,3 +120,9 @@ class HookViewPage(QWidget):
                 if self.tableWidget.cellWidget(row,0).isChecked():
                     self.tableWidget.removeRow(row)
                     return
+
+    def selectedHook(self):
+            rowCount = self.tableWidget.rowCount()
+            for row in range(rowCount):
+                if self.tableWidget.cellWidget(row,0).isChecked():
+                    return self.tableWidget.item(row,1).text()

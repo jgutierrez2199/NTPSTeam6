@@ -2,14 +2,15 @@
 # Dr.Salamah
 # Team 6 - Byte Me
 
-from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt5 import QtCore, QtWidgets
+from PyQt5.QtWidgets import QDialog, QFileDialog
 
-class Ui_CreatEditHookOverlay(object):
-    def setupUi(self, CreatEditHookOverlay):
-        CreatEditHookOverlay.setObjectName("CreatEditHookOverlay")
-        CreatEditHookOverlay.resize(568, 232)
-        CreatEditHookOverlay.setStyleSheet("background-color: rgb(255, 255, 255);")
-        self.frame = QtWidgets.QFrame(CreatEditHookOverlay)
+class Ui_CreatEditHookOverlay(QDialog):
+    def __init__(self, parent=None):
+        QDialog.__init__(self, parent)
+        self.resize(568, 232)
+        self.setStyleSheet("background-color: rgb(255, 255, 255);")
+        self.frame = QtWidgets.QFrame(self)
         self.frame.setGeometry(QtCore.QRect(10, 10, 551, 211))
         self.frame.setStyleSheet("")
         self.frame.setFrameShape(QtWidgets.QFrame.StyledPanel)
@@ -43,9 +44,12 @@ class Ui_CreatEditHookOverlay(object):
         self.EditHookPath = QtWidgets.QTextEdit(self.frame)
         self.EditHookPath.setGeometry(QtCore.QRect(170, 120, 221, 31))
         self.EditHookPath.setObjectName("EditHookPath")
-
-        self.retranslateUi(CreatEditHookOverlay)
-        QtCore.QMetaObject.connectSlotsByName(CreatEditHookOverlay)
+        self.SaveButton.clicked.connect(lambda: self.onSave())
+        self.CancelButton.clicked.connect(lambda: self.onCancel())
+        self.BrowseButton.clicked.connect(lambda: self.openFileNameDialog())
+        self.retranslateUi(self)
+        QtCore.QMetaObject.connectSlotsByName(self)
+        self.result=[]
 
     def retranslateUi(self, CreatEditHookOverlay):
         _translate = QtCore.QCoreApplication.translate
@@ -60,3 +64,15 @@ class Ui_CreatEditHookOverlay(object):
         self.Description.setText(_translate("CreatEditHookOverlay", "Description"))
         self.EditHookPath.setPlaceholderText(_translate("CreatEditHookOverlay", "               Hook Path"))
 
+    def onSave(self):
+        self.result = (self.EdiHookName.toPlainText(),self.EditDescription.toPlainText(),self.EditHookPath.toPlainText())
+        self.accept()
+
+    def onCancel(self):
+        self.close()
+
+    def openFileNameDialog(self):
+        options = QFileDialog.Options()
+        options |= QFileDialog.DontUseNativeDialog
+        fileName, _ = QFileDialog.getOpenFileName(self, "QFileDialog.getOpenFileName()", "", "All Files (*);;Python Files (*.py)", options=options)
+        self.EditHookPath.setPlainText(fileName)
