@@ -2,7 +2,6 @@
 # Dr.Salamah
 # Team 6 - Byte Me
 
-import sys
 from PyQt5 import QtCore, QtGui, QtWidgets
 
 class Ui_CreatEditHookOverlay(object):
@@ -19,22 +18,15 @@ class Ui_CreatEditHookOverlay(object):
         self.CancelButton = QtWidgets.QPushButton(self.frame)
         self.CancelButton.setGeometry(QtCore.QRect(400, 160, 81, 30))
         self.CancelButton.setObjectName("CancelButton")
-        self.CancelButton.clicked.connect(QtCore.QCoreApplication.instance().quit)
-
         self.HookPath = QtWidgets.QLabel(self.frame)
         self.HookPath.setGeometry(QtCore.QRect(69, 130, 91, 21))
         self.HookPath.setObjectName("HookPath")
         self.BrowseButton = QtWidgets.QPushButton(self.frame)
         self.BrowseButton.setGeometry(QtCore.QRect(400, 120, 81, 30))
         self.BrowseButton.setObjectName("BrowseButton")
-        #self.BrowseButton.clicked.connect(self.file_open())
-
-
         self.SaveButton = QtWidgets.QPushButton(self.frame)
         self.SaveButton.setGeometry(QtCore.QRect(310, 160, 81, 30))
         self.SaveButton.setObjectName("SaveButton")
-        self.SaveButton.clicked.connect(
-            QtCore.QCoreApplication.instance().quit)
         self.EditDescription = QtWidgets.QTextEdit(self.frame)
         self.EditDescription.setGeometry(QtCore.QRect(170, 70, 311, 41))
         self.EditDescription.setObjectName("EditDescription")
@@ -51,7 +43,6 @@ class Ui_CreatEditHookOverlay(object):
         self.EditHookPath = QtWidgets.QTextEdit(self.frame)
         self.EditHookPath.setGeometry(QtCore.QRect(170, 120, 221, 31))
         self.EditHookPath.setObjectName("EditHookPath")
-        
 
         self.retranslateUi(CreatEditHookOverlay)
         QtCore.QMetaObject.connectSlotsByName(CreatEditHookOverlay)
@@ -68,21 +59,4 @@ class Ui_CreatEditHookOverlay(object):
         self.EdiHookName.setPlaceholderText(_translate("CreatEditHookOverlay", "                         Hook Name"))
         self.Description.setText(_translate("CreatEditHookOverlay", "Description"))
         self.EditHookPath.setPlaceholderText(_translate("CreatEditHookOverlay", "               Hook Path"))
-
-    def file_open(self):
-        pass
-        # options = QFileDialog.Options()
-        # options |= QFileDialog.DontUseNativeDialog
-        # name, _ = QFileDialog.getOpenFileName(None, "QFileDialog.getOpenFileName()", "", "All Files (*);;Python Files (*.py)", options=options)
-        # self.HookPath.setText(name)
-
-
-if __name__ == "__main__":
-
-    app = QtWidgets.QApplication(sys.argv)
-    CreatEditHookOverlay = QtWidgets.QDialog()
-    ui = Ui_CreatEditHookOverlay()
-    ui.setupUi(CreatEditHookOverlay)
-    CreatEditHookOverlay.show()
-    sys.exit(app.exec_())
 

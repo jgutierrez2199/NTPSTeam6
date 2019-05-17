@@ -2,8 +2,7 @@
 # Dr.Salamah
 # Team 6 - Byte Me
 
-import sys
-from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt5 import QtCore, QtWidgets
 
 class Ui_Dialog(object):
     def setupUi(self, Dialog):
@@ -36,14 +35,3 @@ class Ui_Dialog(object):
         _translate = QtCore.QCoreApplication.translate
         Dialog.setWindowTitle(_translate("Dialog", "Proxy Behavior Disabled Notification"))
         self.label.setText(_translate("Dialog", "<html><head/><body><p align=\"center\"><span style=\" font-size:10pt; font-weight:600;\">Proxy behavior has been disabled. The system has restored to the previous proxy settings and it will stop appending packet information to the live traffic PCAP file.</span></p></body></html>"))
-
-
-if __name__ == "__main__":
-    import sys
-    app = QtWidgets.QApplication(sys.argv)
-    Dialog = QtWidgets.QDialog()
-    ui = Ui_Dialog()
-    ui.setupUi(Dialog)
-    Dialog.show()
-    sys.exit(app.exec_())
-

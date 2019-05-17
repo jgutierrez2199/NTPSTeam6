@@ -2,8 +2,7 @@
 # Dr.Salamah
 # Team 6 - Byte Me
 
-import sys
-from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt5 import QtCore, QtWidgets
 
 class Ui_Dialog(object):
     def setupUi(self, Dialog):
@@ -34,16 +33,5 @@ class Ui_Dialog(object):
 
     def retranslateUi(self, Dialog):
         _translate = QtCore.QCoreApplication.translate
-        Dialog.setWindowTitle(_translate("Dialog", "Queue Error Message"))
-        self.label.setText(_translate("Dialog", "<html><head/><body><p align=\"center\"><span style=\" font-size:10pt; font-weight:600;\">The queue has reached its capacity. No new packets will be accepted until there is space available.</span></p></body></html>"))
-
-
-if __name__ == "__main__":
-    import sys
-    app = QtWidgets.QApplication(sys.argv)
-    Dialog = QtWidgets.QDialog()
-    ui = Ui_Dialog()
-    ui.setupUi(Dialog)
-    Dialog.show()
-    sys.exit(app.exec_())
-
+        Dialog.setWindowTitle(_translate("Dialog", "Proxy Behavior Enabled Notification"))
+        self.label.setText(_translate("Dialog", "<html><head/><body><p align=\"center\"><span style=\" font-size:10pt; font-weight:600;\">Proxy behavior has been enabled. The system has backed up the system\'s proxy settings and will restore to it when the proxy behavior is disabled.</span></p></body></html>"))

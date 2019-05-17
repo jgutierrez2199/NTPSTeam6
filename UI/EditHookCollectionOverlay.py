@@ -2,11 +2,9 @@
 # Dr.Salamah
 # Team 6 - Byte Me
 
-import sys
 from PyQt5 import QtCore, QtGui, QtWidgets
 
-class UI_Dialog(object):
-
+class Ui_Dialog(object):
     def setupUi(self, Dialog):
         Dialog.setObjectName("Dialog")
         Dialog.resize(627, 495)
@@ -117,14 +115,3 @@ class UI_Dialog(object):
         self.TableEdit.setPlaceholderText(_translate("Dialog", "Enter Sequence No."))
         self.TableComboBox.setItemText(0, _translate("Dialog", "Disabled"))
         self.TableComboBox.setItemText(1, _translate("Dialog", "Enabled"))
-
-
-if __name__ == "__main__":
-    import sys
-    app = QtWidgets.QApplication(sys.argv)
-    Dialog = QtWidgets.QDialog()
-    ui = Ui_Dialog()
-    ui.setupUi(Dialog)
-    Dialog.show()
-    sys.exit(app.exec_())
-

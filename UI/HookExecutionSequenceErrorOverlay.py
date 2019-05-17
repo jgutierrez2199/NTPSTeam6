@@ -2,13 +2,16 @@
 # Dr.Salamah
 # Team 6 - Byte Me
 
-import sys
 from PyQt5 import QtCore, QtGui, QtWidgets
 
 class Ui_Dialog(object):
     def setupUi(self, Dialog):
         Dialog.setObjectName("Dialog")
-        Dialog.resize(504, 205)
+        Dialog.resize(501, 206)
+        font = QtGui.QFont()
+        font.setBold(True)
+        font.setWeight(75)
+        Dialog.setFont(font)
         self.frame = QtWidgets.QFrame(Dialog)
         self.frame.setGeometry(QtCore.QRect(10, 10, 481, 181))
         self.frame.setFrameShape(QtWidgets.QFrame.StyledPanel)
@@ -16,15 +19,18 @@ class Ui_Dialog(object):
         self.frame.setObjectName("frame")
         self.label = QtWidgets.QLabel(self.frame)
         self.label.setGeometry(QtCore.QRect(10, 10, 471, 111))
-        self.label.setToolTipDuration(-1)
         self.label.setFrameShape(QtWidgets.QFrame.NoFrame)
         self.label.setFrameShadow(QtWidgets.QFrame.Raised)
         self.label.setWordWrap(True)
         self.label.setObjectName("label")
         self.buttonBox = QtWidgets.QDialogButtonBox(self.frame)
         self.buttonBox.setGeometry(QtCore.QRect(130, 140, 341, 32))
+        font = QtGui.QFont()
+        font.setBold(True)
+        font.setWeight(75)
+        self.buttonBox.setFont(font)
         self.buttonBox.setOrientation(QtCore.Qt.Horizontal)
-        self.buttonBox.setStandardButtons(QtWidgets.QDialogButtonBox.Ok)
+        self.buttonBox.setStandardButtons(QtWidgets.QDialogButtonBox.No|QtWidgets.QDialogButtonBox.Yes)
         self.buttonBox.setObjectName("buttonBox")
 
         self.retranslateUi(Dialog)
@@ -34,16 +40,5 @@ class Ui_Dialog(object):
 
     def retranslateUi(self, Dialog):
         _translate = QtCore.QCoreApplication.translate
-        Dialog.setWindowTitle(_translate("Dialog", "Proxy Behavior Enabled Notification"))
-        self.label.setText(_translate("Dialog", "<html><head/><body><p align=\"center\"><span style=\" font-size:10pt; font-weight:600;\">Proxy behavior has been enabled. The system has backed up the system\'s proxy settings and will restore to it when the proxy behavior is disabled.</span></p></body></html>"))
-
-
-if __name__ == "__main__":
-    import sys
-    app = QtWidgets.QApplication(sys.argv)
-    Dialog = QtWidgets.QDialog()
-    ui = Ui_Dialog()
-    ui.setupUi(Dialog)
-    Dialog.show()
-    sys.exit(app.exec_())
-
+        Dialog.setWindowTitle(_translate("Dialog", "Hook Execution Sequence Error"))
+        self.label.setText(_translate("Dialog", "<html><head/><body><p align=\"center\"><span style=\" font-size:10pt; font-weight:600;\">There is another hook with that sequence number. Would you like to override the sequence number and update the sequencing for the rest of hooks within this hook collection?</span></p></body></html>"))
