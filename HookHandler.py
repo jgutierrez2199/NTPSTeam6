@@ -5,6 +5,7 @@ class HookHandler:
     """Class that handles Hooks, Hook Collections, and PCAP functionality"""
     collections = []
     enabled = []
+    masterHookList = [] 
 
 
     def setHookName(self, collectionID, hookID, name):
@@ -33,7 +34,7 @@ class HookHandler:
 
     def addHook(self, collectionID, hook)
         """Adds a hook to the collection """
-        self.collections[collectionID].addHook(hook)
+        self.collections[collectionID].addHook(masterHookList[hookID])
 
     def removeHook(self, collectionID, hookID)
         """Removes hook at an index within a collection"""
@@ -74,7 +75,9 @@ class HookHandler:
             if self.enabled[i]:
                 self.collections[i].runCollection(packet)
 
-
+    def addHookToMaster(self, Hook):
+        """ Append a hook to the collection of master hooks"""
+        masterHookList.append(Hook)
 
 
 
