@@ -20,8 +20,18 @@ class HookCollection:
             
     def removeHook(self, hookNumber):
         """Removes Hook at an index. """
-        del self.hooks[hookNumber]
-        del self.enabled[hooknumber]
+        newHookList = []
+        newEnabledList = []
+        i = 0
+        j = 0
+        while (i < len(self.hooks))
+            if j != hookNumber:
+                newHookList[i] = self.hooks[j]
+                newEnabledList[i] = self.enabled[j]
+                i = i + 1
+            j = j + 1
+        self.hooks = newHookList
+        self.enabled = newEnabledList
     
     def reorder(self, sequence):
         """Reorders the execution order of hooks in a collection. Passed a list of positional indexes"""
@@ -46,4 +56,11 @@ class HookCollection:
     def setName(self, name):
         """ Sets the name value."""
         self.name = name
-        
+
+    def setHookStatus(self, hookID, status):
+        """Enables the hook at the index"""
+        self.enabled[hookID] = status
+
+    def getHook(self, hookID):
+        """Returns the hook at an index."""
+        return self.hooks[hookID]
